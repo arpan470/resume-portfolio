@@ -111,11 +111,11 @@ const [downloadProgress, setDownloadProgress] = useState(0);
     };
 
     await emailjs.send(
-      'service_5o1egha',
-      'template_wyp2yom',
-      templateParams,
-      'pUNCFP9T5tSSM_YuB'
-    );
+  'service_5o1egha',
+  'template_wyp2yom',
+  templateParams,
+  'pUNCFP9T5tSSM_YuB'
+);
 
     setFormStatus({
       submitted: true,
