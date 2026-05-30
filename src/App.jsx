@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 // Import only verified icons from react-icons
 import { 
@@ -91,46 +92,65 @@ const [downloadProgress, setDownloadProgress] = useState(0);
 
   // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setFormStatus({ ...formStatus, loading: true, message: '' });
-    
-    try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Save to localStorage
-      const messages = JSON.parse(localStorage.getItem('contact_messages') || '[]');
-      messages.push({ 
-        ...formData, 
-        timestamp: new Date().toISOString(),
-        id: Date.now()
-      });
-      localStorage.setItem('contact_messages', JSON.stringify(messages));
-      
+  e.preventDefault();
+
+  if (!validateForm()) return;
+
+  setFormStatus({
+    ...formStatus,
+    loading: true,
+    message: ''
+  });
+
+  try {
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject || 'Portfolio Inquiry',
+      message: formData.message
+    };
+
+    await emailjs.send(
+      'service_5o1egha',
+      'template_wyp2yom',
+      templateParams,
+      'pUNCFP9T5tSSM_YuB'
+    );
+
+    setFormStatus({
+      submitted: true,
+      success: true,
+      message: 'Message sent successfully! I will get back to you soon.',
+      loading: false
+    });
+
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+
+    setTimeout(() => {
       setFormStatus({
-        submitted: true,
-        success: true,
-        message: 'Thank you! Your message has been sent successfully. I\'ll get back to you soon!',
-        loading: false
-      });
-      
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      setTimeout(() => {
-        setFormStatus({ submitted: false, success: false, message: '', loading: false });
-      }, 5000);
-      
-    } catch (error) {
-      setFormStatus({
-        submitted: true,
+        submitted: false,
         success: false,
-        message: 'Oops! Something went wrong. Please try again later.',
+        message: '',
         loading: false
       });
-    }
-  };
+    }, 5000);
+
+  } catch (error) {
+    console.error(error);
+
+    setFormStatus({
+      submitted: true,
+      success: false,
+      message: 'Failed to send message. Please try again.',
+      loading: false
+    });
+  }
+};
 
   // Handle PDF Download
   const handleDownloadPDF = async () => {
