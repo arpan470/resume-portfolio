@@ -266,7 +266,10 @@ const [downloadProgress, setDownloadProgress] = useState(0);
   className="profile-image-wrapper"
   whileHover={{ scale: 1.05 }}
   whileTap={{ scale: 0.95 }}
-  onClick={() => setShowProfileModal(true)}
+  onClick={() => {
+    console.log("clicked");
+    setShowProfileModal(true);
+  }}
   style={{ cursor: 'pointer' }}
 >
                   <img
