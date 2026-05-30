@@ -50,8 +50,8 @@ export default function App() {
     loading: false
   });
   const [showResumeModal, setShowResumeModal] = useState(false);
-  const [downloadProgress, setDownloadProgress] = useState(0);
-  
+const [showProfileModal, setShowProfileModal] = useState(false);
+const [downloadProgress, setDownloadProgress] = useState(0);
   const { scrollYProgress } = useScroll();
   const contactRef = useRef(null);
   const formRef = useRef(null);
@@ -263,10 +263,12 @@ export default function App() {
             >
               <div className="profile-section">
                 <motion.div 
-                  className="profile-image-wrapper"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+  className="profile-image-wrapper"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => setShowProfileModal(true)}
+  style={{ cursor: 'pointer' }}
+>
                   <img
                     src={profilePic}
                     alt="Gurarpan Singh"
@@ -801,6 +803,38 @@ export default function App() {
           </motion.footer>
         </div>
       </div>
+
+{/* Profile Image Modal */}
+<AnimatePresence>
+  {showProfileModal && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="modal-overlay"
+      onClick={() => setShowProfileModal(false)}
+    >
+      <motion.div
+        initial={{ scale: 0.7 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.7 }}
+        transition={{ duration: 0.3 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={profilePic}
+          alt="Profile"
+          style={{
+            width: '400px',
+            maxWidth: '90vw',
+            borderRadius: '20px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.4)'
+          }}
+        />
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
       {/* Resume Preview Modal */}
       <AnimatePresence>
