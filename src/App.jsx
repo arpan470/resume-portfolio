@@ -326,7 +326,7 @@ const [downloadProgress, setDownloadProgress] = useState(0);
                     </span>
                     <span className="badge badge-secondary">
                       <FiCalendar size={14} />
-                      6th Semester
+                      7th Semester
                     </span>
                     <span className="badge badge-success">
                       <FiBriefcase size={14} />
@@ -351,7 +351,7 @@ const [downloadProgress, setDownloadProgress] = useState(0);
                   >
                     <div className="contact-item">
                       <FiMail size={18} />
-                      <span>sgurarpan1699@gmail.com</span>
+                      <span>gurarpans1780@gmail.com</span>
                     </div>
                     <div className="contact-item">
                       <FiPhone size={18} />
@@ -700,9 +700,9 @@ const [downloadProgress, setDownloadProgress] = useState(0);
                 <div className="social-links">
                   <h4>Follow Me</h4>
                   <div className="social-icons">
-                    <a href="https://github.com" target="_blank" rel="noopener noreferrer"><FiGithub size={20} /></a>
+                    <a href="https://github.com/arpan470" target="_blank" rel="noopener noreferrer"><FiGithub size={20} /></a>
                     <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><FiLinkedin size={20} /></a>
-                    <a href="mailto:sgurarpan1699@gmail.com"><FiMail size={20} /></a>
+                    <a href="mailto:gurarpans1780@gmail.com"><FiMail size={20} /></a>
                   </div>
                 </div>
               </div>
