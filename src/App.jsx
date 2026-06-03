@@ -10,6 +10,7 @@ import {
   FiUser, FiMessageSquare, FiFileText, FiX, FiLoader, FiEye
 } from 'react-icons/fi';
 import { FaGraduationCap } from 'react-icons/fa';
+import resumePDF from './assets/resume.pdf';
 import profilePic from './assets/profile.jpg';
 
 // Custom icons for missing ones
@@ -154,32 +155,32 @@ const [downloadProgress, setDownloadProgress] = useState(0);
 
   // Handle PDF Download
   const handleDownloadPDF = async () => {
-    setDownloadProgress(0);
-    
-    const interval = setInterval(() => {
-      setDownloadProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 100);
-    
+  setDownloadProgress(0);
+
+  const interval = setInterval(() => {
+    setDownloadProgress(prev => {
+      if (prev >= 100) {
+        clearInterval(interval);
+        return 100;
+      }
+      return prev + 10;
+    });
+  }, 100);
+
+  setTimeout(() => {
+    const link = document.createElement('a');
+    link.href = resumePDF;
+    link.download = 'Gurarpan_Singh_Resume.pdf';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
     setTimeout(() => {
-      const pdfUrl = `${import.meta.env.BASE_URL}resume.pdf`;
-      const link = document.createElement('a');
-      link.href = pdfUrl;
-      link.download = 'Gurarpan_Singh_Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      setTimeout(() => {
-        setDownloadProgress(0);
-      }, 1000);
+      setDownloadProgress(0);
     }, 1000);
-  };
+  }, 1000);
+};
 
   const generateAndDownloadPDF = () => {
     handleDownloadPDF();
