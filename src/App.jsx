@@ -10,7 +10,6 @@ import {
   FiUser, FiMessageSquare, FiFileText, FiX, FiLoader, FiEye
 } from 'react-icons/fi';
 import { FaGraduationCap } from 'react-icons/fa';
-import resumePDF from './assets/resume.pdf';
 import profilePic from './assets/profile.jpg';
 
 // Custom icons for missing ones
@@ -169,7 +168,7 @@ const [downloadProgress, setDownloadProgress] = useState(0);
 
   setTimeout(() => {
     const link = document.createElement('a');
-    link.href = resumePDF;
+    link.href = `${import.meta.env.BASE_URL}resume.pdf`;
     link.download = 'Gurarpan_Singh_Resume.pdf';
 
     document.body.appendChild(link);
