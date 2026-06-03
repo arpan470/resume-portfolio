@@ -167,7 +167,7 @@ const [downloadProgress, setDownloadProgress] = useState(0);
     }, 100);
     
     setTimeout(() => {
-      const pdfUrl = '/resume.pdf';
+      const pdfUrl = '/resume-portfolio/resume.pdf';
       const link = document.createElement('a');
       link.href = pdfUrl;
       link.download = 'Gurarpan_Singh_Resume.pdf';
